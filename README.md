@@ -92,6 +92,34 @@ Assets/
 > Сборка использует Mono (IL2CPP-модуль в этом Unity не установлен) и требует
 > WinRAR с SFX-модулем для упаковки в один файл.
 
+## Запуск в браузере (GitHub Pages)
+
+Игра собрана под WebGL и выложена на GitHub Pages:
+
+**▶ https://datakda.github.io/top-down-racing/**
+
+Репозиторий: https://github.com/Datakda/top-down-racing
+
+| Ветка | Что в ней |
+|---|---|
+| `main` | исходники Unity-проекта (Assets, Packages, ProjectSettings) |
+| `gh-pages` | собранная WebGL-версия, которую отдаёт GitHub Pages |
+
+Пересобрать и обновить сайт:
+
+```bash
+# 1. В Unity: Tools → Racing → Собрать для WebGL
+# 2. Скопировать содержимое Build/WebGL в корень ветки gh-pages
+git checkout gh-pages
+cp -r ../Build/WebGL/* .
+git add -A && git commit -m "WebGL build" && git push
+```
+
+> Важно: в WebGL-сборке включён **Decompression Fallback** — без него загрузчик Unity
+> не смог бы распаковать `.unityweb`-файлы, потому что обычные статические хостинги
+> (включая GitHub Pages) не отдают заголовок `Content-Encoding: gzip`.
+> Пути в `index.html` относительные, поэтому сайт работает из подпапки `/top-down-racing/`.
+
 ## Ассеты
 
 * **Kenney — Racing Pack** (https://kenney.nl/assets/racing-pack), лицензия CC0 —
